@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://192.168.178.41/index.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><script type="application/javascript">var values = [
+8,8,8,8,8,8,8,8,8,7,8,8,8,6,64,79,2,3,2,2,2,3,2,4,4,4,5,5,5,4,4,5,4,5,4,5,5,5,4,5,5,4,3,2,6,3,3,2,3,2,3,3,2,5,4,5,6,5,5,5,5,6,5,4,5,5,5,5,5,5,3,2,79,97,96,97,94,3,2,3,2,4,5,4,5,5,5,5,7,5,8,7,9,7,10,13,14,12,12,12,41,67,7,14,11,5,13,12,7,12,13,10,7,15,13,14,6,7,7,8,7,7,7,7,7,6,7,7,7,5,5,48,4,7,6,25,11,12,12,7,5,15,13,12,18,16,20,20,17,17,20,18,21,20,17,12,11,12,84,102,100,100,99,67,6,7,6,7,65,80,81,82,75,35,42,72,54,36,54,15,53,20,44,34,32,37,22,45,11,47,32,44,60,46,137,53,60,44,16,8,8,7,5,5,5,5,3,3,2,3,4,4,3,2,4,4,5,5,5,5,5,4,5,5,5,5,4,25,96,96,98,98,84,6,6,6,7,8,9,8,9,8,9,9,8,9,8,9,8,9,8,6,6,6,6,6,6,5,3,4,3,6,6,6,6,5,6,18,77,12,5,6,5,6,5,4,3,3,3,3,3,4,4,3,4,19,99,99,99,99,56,5,5,5,4,5,4,5,4,3,3,2,2,2,2,2,2,2,2,3,4,5,5,5,4,5,4,5,5,4,5,4,5,4,2,2,2,2,2,2,2,2,2,3,4,5,5,5,4,5,4,5,4,5,4,5,4,3,2,2,2,2,2,2,2,2,2,3,4,5,4,5,5,5,4,5,4,5,9,5,29,109,30,2,2,2,3,2,2,4,4,5,5,4,5,74,100,100,100,101,100,100,100,99,99,99,99,99,99,98,99,98,100,101,101,102,101,9,7,9,8,8,8,8,8,8,6,5,6,6,5,6,5,6,6,6,7,7,8,7,8,8,8,8,11,12,44,97,12,13,11,10,11,10,11,10,11,10,11,10,11,11,11,10,10,11,10,10,11,13,15,16,15,15,15,15,15,15,15,35,36,18,17,14,10,45,108,107,107,108,104,13,13,12,13,13,13,12,13,12,13,12,12,11,12,12,11,12,12,12,12,12,11,12,9,10,9,9,10,9,10,11,11,12,11,7,7,7,6,6,6,6,6,6,28,80,78,35,29,45,4,4,4,4,4,6,6,7,7,6,7,6,6,6,6,7,6,5,5,4,4,4,4,3,4,3,3,4,24,98,172,153,101,101,100,18,5,5,5,4,5,5,4,3,2,2,3,2,2,2,3,2,2,3,5,4,5,4,5,5,5,5,5,4,5,4,5,4,2,2,2,2,2,2,2,2,2,2,2,4,5,4,5,4,4,5,4,4,4,4,5,2,2,1,2,2,2,2,2,2,1,2,4,4,5,4,4,5,4,4,4,4,4,5,2,2,2,2,1,2,2,2,2,2,1,3,5,4,4,4,5,4,4,4,4,4,4,3,2,1,2,2,2,1,79,96,96,96,71,3,5,4,4,4,4,4,4,4,4,4,4,1,2,2,1,2,2,1,2,2,2,1,4,4,4,4,4,4,4,4,4,4,4,4,3,3,4,4,4,4];
+function draw() {
+  var canvas = document.getElementById('canvas');
+  if (canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+    var i;
+    var scale_x, scale_y;
+    var max_val, max_scale;
+    var label;
+
+    scale_s = 10;
+    scale_y = 10;
+
+    if(values.length > 1) {
+      scale_x = 1440.0 / (values.length-1);
+    }
+
+    max_val = Math.max(...values);
+	total = 0;
+    for(i = 0; i <  values.length; i++) {
+	   total += values[i];
+	}
+    	
+	average_power  = Math.round(total     * 30 / values.length);
+	peak_power     = Math.round(max_val * 30);
+    
+    if(max_val * 30 < 1000)      {max_scale =   1.0; divs = 5}
+    else if(max_val * 30 < 2000) {max_scale =   2.0; divs = 4}
+    else if(max_val * 30 < 5000) {max_scale =   5.0; divs = 5}
+    else if(max_val * 30 < 10000){max_scale =  10.0; divs = 5}
+    else if(max_val * 30 < 20000){max_scale =  20.0; divs = 4}
+    else if(max_val * 30 < 50000){max_scale =  50.0; divs = 5}
+    else                          {max_scale = 100.0; divs = 5}
+
+    scale_y   = (30.0/1000)*720.0/max_scale;
+
+    ctx.fillStyle = 'rgb(80, 80, 80)';
+    ctx.fillRect(0, 0, 1528, 840);
+
+    ctx.textAlign = 'center'; 
+    ctx.fillStyle = 'rgb(255, 255, 255)';
+    ctx.font = '20px Arial';
+    ctx.fillText('ESP32 Powermon : Household power usage over the last 24 hours',760,40);
+    
+    ctx.textAlign = 'center'; 
+    ctx.fillStyle = 'rgb(255, 255, 255)';
+    ctx.font = '16px Arial';
+    label = 'Average power usage is ';
+    label = label.concat(average_power);
+    label = label.concat(' W');
+    ctx.fillText(label, 400, 820);
+
+    label = 'Peak power usage is ';
+    label = label.concat(peak_power);
+    label = label.concat(' W');
+    ctx.fillText(label, 1120, 820);
+	
+	
+    ctx.fillStyle = 'rgb(0, 0, 0)';
+    ctx.fillRect(60, 60, 1440, 720);
+
+    ctx.strokeStyle = '#404040';
+	for(i = 1; i < divs; i++) {
+      ctx.moveTo(60,      780-(720/divs)*i)
+      ctx.lineTo(60+1440, 780-(720/divs)*i);
+      ctx.stroke();
+	}
+    ctx.font = '12px Arial';
+	ctx.fillStyle = 'rgb(255, 255, 255)';
+  	ctx.textAlign = 'end'; 
+	for(i = 0; i <= divs; i++) {
+      label = '';
+      label = label.concat(max_scale*i/divs);
+      label = label.concat(' kW');
+      ctx.fillText(label, 55, 785-(720/divs)*i);
+	}
+
+	for(i = 1; i < 8; i++) {
+      ctx.moveTo(60+i*180, 40)
+      ctx.lineTo(60+i*180, 780);
+      ctx.stroke();
+	}
+
+    ctx.strokeStyle='#FFFF8F';
+    ctx.beginPath();
+    ctx.moveTo(60, 780-values[0]*scale_y)
+    for(i = 1; i <  values.length; i++) {
+      ctx.lineTo(60+scale_x*i, 780-values[i]*scale_y);
+    }
+    ctx.stroke();
+  }
+}
+</script>
+</head>
+<body onload="draw();">
+  <canvas id="canvas" width="1520" height="840"></canvas>
+
+
+</body></html>
