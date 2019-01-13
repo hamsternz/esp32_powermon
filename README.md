@@ -6,3 +6,5 @@ this pulse you can count them and measure your household power usage.
 
 This project for the ESP32 uses a Light Dependant Resistor (LDR) to sense the pulses, 
 and serves a small webpage to draw a graph of the last 24 hours.
+
+NOTE: Includes code from https://github.com/igrr/esp32-http-server for the web server.
