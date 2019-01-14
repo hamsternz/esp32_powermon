@@ -1,3 +1,21 @@
+/********************************************************
+ * powermon.c : A household power meter monitor for ESP32
+ *
+ * (c) 2019 Mike Field <hamster@snap.net.nz>
+ *
+ * Based on the ESP-IDF I2C example, this uses the ADC
+ * to detect and count pulses from the LED on a power 
+ * meter, which provide a direct measurement of household 
+ * power usage.
+ *
+ * The sensor is an LDR, with a suitable resistor network
+ * to have the ADC input voltage swing around 2V or so
+ * when the LED blinks. Email me for details if you want
+ * more info.
+ *
+ * Oh, web page is served as https://[ip addr]/index.html
+ *
+ *****************************************************/
 #include <stdio.h>
 #include <string.h>
 #include "freertos/FreeRTOS.h"

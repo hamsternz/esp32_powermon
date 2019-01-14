@@ -1,3 +1,10 @@
+/********************************************************
+ * webpage.c : Web server and web page for my ESP32 
+ *             household power meter monitor
+ *
+ * (c) 2019 Mike Field <hamster@snap.net.nz>
+ * 
+ *******************************************************/
 #include <stdio.h>
 #include <string.h>
 #include <stdint.h>
